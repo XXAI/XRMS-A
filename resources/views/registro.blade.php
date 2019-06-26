@@ -27,7 +27,7 @@
                         <form id="formulario_registro"> <!-- action="{{url('api/registro_participantes')}}" method="post" -->
                             <div class="form-group"> 
                                 <label>Tipo:</label> 
-                                <select name="tipo" id="tipo" class="form-control" onchange="cambiarTipo()">
+                                <select name="tipo_asistente" id="tipo_asistente" class="form-control" onchange="cambiarTipo()">
                                     <option value='ayuntamiento' selected="selected">Ayuntamiento</option>
                                     <option value='personal'>Personal de salud</option>
                                 </select>
@@ -86,10 +86,10 @@
                         <div class="form-row">
                             <div class="col-6"></div>
                             <div class="col-4">
-                                <button class="btn btn-default btn-block" type="reset">Limpiar Formulario</button>
+                                <button class="btn btn-default btn-block" type="button">Limpiar Formulario</button>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                                <button class="btn btn-primary btn-block" type="button" onclick="enviarFormulario()">Guardar</button>
                             </div>
                         </div>
                     </div>

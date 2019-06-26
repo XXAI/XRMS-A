@@ -17,7 +17,7 @@ class CrearTablaAsistentes extends Migration
             $table->bigIncrements('id');
             $table->string('tipo_asistente');
             $table->string('nombre');
-            $table->integer('puesto_id')->unsigned();
+            $table->integer('puesto_id')->nullable()->unsigned();
             $table->string('otro_puesto')->nullable();
             $table->string('telefono_oficina')->nullable();
             $table->string('telefono_celular')->nullable();
