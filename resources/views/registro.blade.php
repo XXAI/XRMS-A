@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Red Salud: Registro</title>
         <!-- Fonts -->
         <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
         <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
@@ -13,12 +13,29 @@
     </head>
     <body>
         <div>
-            <div class="jumbotron jumbotron-fluid text-center">
+            <!--div class="jumbotron jumbotron-fluid text-center">
                 <div class="container">
                     <h1 class="display-5">Instalación y Toma de Protesta de la Red Chiapaneca de Municipios por la Salud</h1>
                 </div>
-            </div>
+            </div-->
+            <br>
             <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="{{asset('images/LOGOS-01.jpg')}}" class="img-fluid" alt="Responsive image">
+                    </div>
+                    <div class="col-3">
+                        <img src="{{asset('images/LOGOS-03.jpg')}}" class="img-fluid" alt="Responsive image">
+                    </div>
+                    <div class="col-3">
+                        <img src="{{asset('images/Promocion de la Salud Horizontall.jpg')}}" class="img-fluid" alt="Responsive image">
+                    </div>
+                    <div class="col-3">
+                        <img src="{{asset('images/LOGO-01.jpg')}}" class="img-fluid" alt="Responsive image">
+                    </div>
+                </div>
+                <hr>
+                <h2 class="display-5 text-center">Instalación y Toma de Protesta de la Red Chiapaneca de Municipios por la Salud</h2>
                 <div id="formulario-completo" class="card">
                     <div class="card-header text-center">
                         <h5 class="card-title">Formulario de Registro</h5>
@@ -90,16 +107,15 @@
                                 </select>
                                 <div id="error_municipio_id" class="invalid-feedback"></div>
                             </div>
-                            <hr/>
                         </form>
                     </div>
                     <div class="card-footer captura-formulario">
                         <div class="form-row">
-                            <div class="col-6"></div>
-                            <div class="col-4">
+                            <div class="col-md-6 col-hidden"></div>
+                            <div class="col-md-4 col-6">
                                 <button class="btn btn-default btn-block" type="button" onclick="limpiarFormulario()">Limpiar Formulario</button>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <button class="btn btn-primary btn-block" type="button" onclick="enviarFormulario()">Guardar</button>
                             </div>
                         </div>
