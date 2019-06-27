@@ -18,8 +18,8 @@ class FormularioRegistroController extends Controller
     {
         $datos = [
             'puestos' => Puesto::all(),
-            'regiones' => Region::all(),
-            'municipios' => Municipio::orderBy('nombre')->get()
+            'regiones' => Region::all()
+            //'municipios' => Municipio::orderBy('nombre')->get()
         ];
         return view('registro', ['datos' => $datos]);
     }

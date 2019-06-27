@@ -13,17 +13,22 @@
     </head>
     <body>
         <div>
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container text-center">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <div class="container">
                     <h1 class="display-5">Instalación y Toma de Protesta de la Red Chiapaneca de Municipios por la Salud</h1>
                 </div>
             </div>
             <div class="container">
-                <div class="card">
-                    <div class="card-header">
+                <div id="formulario-completo" class="card">
+                    <div class="card-header text-center">
                         <h5 class="card-title">Formulario de Registro</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center text-success bg-white guardado-correcto" style="display:none;">
+                        <h5 class="card-title">Registro Guardado Exitosamente</h5>
+                        <p class="card-text">Haga click en el boton para capturar otro registro.</p>
+                        <a href="#" class="btn btn-primary" onclick="capturarNuevoRegistro()">Nuevo Registro</a>
+                    </div>
+                    <div class="card-body captura-formulario">
                         <form id="formulario_registro"> <!-- action="{{url('api/registro_participantes')}}" method="post" -->
                             <div class="form-group"> 
                                 <label>Tipo:</label> 
@@ -31,10 +36,12 @@
                                     <option value='ayuntamiento' selected="selected">Ayuntamiento</option>
                                     <option value='personal'>Personal de salud</option>
                                 </select>
+                                <div id="error_tipo_asistente" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" class="form-control" name="nombre">
+                                <input type="text" class="form-control" name="nombre" id="nombre">
+                                <div id="error_nombre" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group form_ayuntamiento"> 
                                 <label>Puesto:</label> 
@@ -44,49 +51,53 @@
                                     <option value='{{$puesto->id}}'>{{$puesto->descripcion}}</option>
                                     @endforeach
                                 </select>
+                                <div id="error_puesto_id" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group" id="div_otro_puesto" style="display:none;">
                                 <label><span class="form_ayuntamiento">Otro</span> Puesto</label>
-                                <input type="text" class="form-control" name="otro_puesto">
+                                <input type="text" class="form-control" name="otro_puesto" id="otro_puesto">
+                                <div id="error_otro_puesto" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
                                 <label>Telefono de oficina</label>
-                                <input type="text" class="form-control" name="telefono_oficina">
+                                <input type="text" class="form-control" name="telefono_oficina" id="telefono_oficina">
+                                <div id="error_telefono_oficina" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
                                 <label>Telefono Celular</label>
-                                <input type="text" class="form-control" name="telefono_celular">
+                                <input type="text" class="form-control" name="telefono_celular" id="telefono_celular">
+                                <div id="error_telefono_celular" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="email">
+                                <input type="email" class="form-control" name="email" id="email">
+                                <div id="error_email" class="invalid-feedback"></div>
                             </div>
-                            <div class="form-group form_ayuntamiento">
+                            <div class="form-group">
                                 <label>Region</label>
-                                <select name="region_id" class="form-control" >
+                                <select name="region_id" id="region_id" class="form-control"  onchange="cargarMunicipios()">
                                     <option value='' selected="selected">Seleccione una region</option>
                                     @foreach($datos['regiones'] as $region)
                                     <option value='{{$region->id}}'>{{$region->nombre}}</option>
                                     @endforeach
                                 </select>
+                                <div id="error_region_id" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group form_ayuntamiento">
                                 <label>Municipio</label>
-                                <select name="municipio_id" class="form-control" >
+                                <select name="municipio_id" id="municipio_id" class="form-control" >
                                     <option value='' selected="selected">Seleccione un municipio</option>
-                                    @foreach($datos['municipios'] as $municipio)
-                                    <option value='{{$municipio->id}}'>{{$municipio->nombre}}</option>
-                                    @endforeach
                                 </select>
+                                <div id="error_municipio_id" class="invalid-feedback"></div>
                             </div>
                             <hr/>
                         </form>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer captura-formulario">
                         <div class="form-row">
                             <div class="col-6"></div>
                             <div class="col-4">
-                                <button class="btn btn-default btn-block" type="button">Limpiar Formulario</button>
+                                <button class="btn btn-default btn-block" type="button" onclick="limpiarFormulario()">Limpiar Formulario</button>
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-primary btn-block" type="button" onclick="enviarFormulario()">Guardar</button>
