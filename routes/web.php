@@ -12,5 +12,8 @@
 */
 
 Route::get('/','FormularioRegistroController');
-
 Route::get('formulario-registro', 'FormularioRegistroController');
+
+Route::get('lista-asistencia', 'ListaAsistenciaController');
+
+Route::get('login',function(){ return view('login'); });

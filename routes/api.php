@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('registro','API\RegistroController');
 
 Route::apiResource('municipios','API\MunicipioController');
+
+//Route::post('login','API\LoginController');

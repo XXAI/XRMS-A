@@ -17,9 +17,19 @@ class RegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $parametros = $request->all();
+        $registros = Asistente::getModel();
+
+        if(isset($parametros['page'])){
+            $resultadosPorPagina = isset($parametros["per_page"])? $parametros["per_page"] : 25;
+            $registros = $registros->paginate($resultadosPorPagina);
+        } else {
+            $registros = $registros->get();
+        }
+
+        return response()->json(['paginado'=>$registros], HttpResponse::HTTP_OK);
     }
 
     /**
