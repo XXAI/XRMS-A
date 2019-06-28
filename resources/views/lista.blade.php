@@ -6,6 +6,7 @@
 
         <title>Red Salud: Lista de Asistencia</title>
         <!-- Fonts -->
+        <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
         <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
         <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
         <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
@@ -35,10 +36,10 @@
                         <h5 class="card-title">Lista de Asistencia</h5>
                     </div>
                     <div class="card-body bg-light">
-                        <form id="formulario_filtro">
+                        <form id="formulario_filtro" onkeydown="return event.key != 'Enter';">
                             <div class="form-row">
                                 <div class="col-6 col-md">
-                                    <input type="text" class="form-control" name="buscar" id="buscar" placeholder="Buscar">
+                                    <input type="text" class="form-control" name="buscar" id="buscar" placeholder="Buscar" onkeydown="buscarPalabra(event)">
                                 </div>
                                 <div class="col-6 col-md">
                                     <select name="tipo_asistente" id="tipo_asistente" class="form-control">
@@ -76,6 +77,7 @@
                                 <th>Nombre</th>
                                 <th>Puesto</th>
                                 <th>Región</th>
+                                <th width="1">Acción</th>
                             </tr>
                         </thead>
                         <tbody id="lista_registros">
@@ -87,30 +89,23 @@
                             </tr>
                         </tbody>
                     </table>
-                    <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end" id="paginador">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#primero" tabindex="-1" aria-disabled="true" onclick="cambiarPagina(event,'Primero')">Primero</a>
-                                </li>
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#anterior" tabindex="-1" aria-disabled="true" onclick="cambiarPagina(event,'anterior')"><span aria-hidden="true">&laquo;</span></a>
-                                </li>
-                                <li class="page-item active" aria-current="page">
-                                    <span class="page-link">
-                                        1
-                                        <span class="sr-only">(current)</span>
-                                    </span>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#4"  onclick="cambiarPagina(event,'2')">2</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#siguiente" onclick="cambiarPagina(event,'siguiente')"><span aria-hidden="true">&raquo;</span></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#ultimo" onclick="cambiarPagina(event,'ultimo')">Ultimo</a>
-                                </li>
-                            </ul>
-                        </nav>
+                    
                     <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-2">
+                                Total: <span id="total_asistentes">0</span>
+                            </div> 
+                            <div class="offset-md-6 col-md-4">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-info boton_primero_anterior" onclick="cargarPagina('primera')"><i class="fas fa-angle-double-left"></i></button>
+                                    <button type="button" class="btn btn-info boton_primero_anterior" onclick="cargarPagina('anterior')"><i class="fas fa-angle-left"></i></button>
+                                    <input type="text" class="form-control text-center" placeholder="Página" value="1" id="pagina_actual" onkeydown="if(event.key == 'Enter'){cargarPagina();}">
+                                    <input type="hidden" value="1" id="total_paginas">
+                                    <button type="button" class="btn btn-info boton_ultimo_siguiente" onclick="cargarPagina('siguiente')"><i class="fas fa-angle-right"></i></button>
+                                    <button type="button" class="btn btn-info boton_ultimo_siguiente"  onclick="cargarPagina('ultima')"><i class="fas fa-angle-double-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

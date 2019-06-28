@@ -20,7 +20,32 @@ class RegistroController extends Controller
     public function index(Request $request)
     {
         $parametros = $request->all();
-        $registros = Asistente::getModel();
+
+        $registros = Asistente::select('asistentes.*','municipios.nombre as municipio','regiones.nombre as region','puestos.descripcion as puesto')
+                                ->leftjoin('municipios','municipios.id','=','asistentes.municipio_id')
+                                ->leftjoin('regiones','regiones.id','=','asistentes.region_id')
+                                ->leftjoin('puestos','puestos.id','=','asistentes.puesto_id');
+
+        if($parametros['buscar']){
+            $registros = $registros->where(function($query) use ($parametros){
+                $query = $query->where('asistentes.nombre','like','%'.$parametros['buscar'].'%')
+                                ->orWhere('email','like','%'.$parametros['buscar'].'%')
+                                ->orWhere('otro_puesto','like','%'.$parametros['buscar'].'%')
+                                ->orWhere('municipios.nombre','like','%'.$parametros['buscar'].'%');
+            });
+        }
+
+        if($parametros['tipo_asistente']){
+            $registros = $registros->where('tipo_asistente',$parametros['tipo_asistente']);
+        }
+
+        if($parametros['puesto_id']){
+            $registros = $registros->where('puesto_id',$parametros['puesto_id']);
+        }
+
+        if($parametros['region_id']){
+            $registros = $registros->where('asistentes.region_id',$parametros['region_id']);
+        }
 
         if(isset($parametros['page'])){
             $resultadosPorPagina = isset($parametros["per_page"])? $parametros["per_page"] : 25;
@@ -98,7 +123,12 @@ class RegistroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $asistente = Asistente::find($id);
+
+        $asistente->asistencia = true;
+        $asistente->save();
+
+        return response()->json(['registro'=>$asistente,'mensaje'=>'exito'],HttpResponse::HTTP_OK);
     }
 
     /**
