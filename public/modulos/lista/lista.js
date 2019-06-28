@@ -30,8 +30,20 @@ function actualizarRegistros(){
             }else{
                 var botones_accion = '<button class="btn btn-primary" alt="Confirmar Asistencia" onclick="confirmarAsistencia('+elemento.id+')"><i class="fas fa-clipboard"></i></button>';
             }
+
+            if(elemento.email){
+                elemento.email = '<br><small>'+elemento.email+'</small>';
+            }else{
+                elemento.email = '';
+            }
+
+            if(elemento.municipio){
+                elemento.municipio = '<br><small>'+elemento.municipio+'</small>';
+            }else{
+                elemento.municipio = '';
+            }
             
-            registros += "<tr><td>"+icono+"</td><td>"+elemento.nombre+"</td><td>"+elemento.puesto+"</td><td>"+elemento.region+"</td><td id='acciones_para_"+elemento.id+"' class='text-center'>"+botones_accion+"</td></tr>";
+            registros += "<tr><td>"+icono+"</td><td>"+elemento.nombre+elemento.email+"</td><td>"+elemento.puesto+"</td><td>"+elemento.region+elemento.municipio+"</td><td id='acciones_para_"+elemento.id+"' class='text-center'>"+botones_accion+"</td></tr>";
         }
         $('#lista_registros').html(registros);
 

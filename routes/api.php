@@ -21,4 +21,6 @@ Route::apiResource('registro','API\RegistroController');
 
 Route::apiResource('municipios','API\MunicipioController');
 
+Route::get('excel-asistencia','API\ExportarListaController');
+
 //Route::post('login','API\LoginController');
