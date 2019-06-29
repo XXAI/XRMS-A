@@ -31,8 +31,10 @@
                     </div>
                 </div>
                 <hr>
+                
                 <div class="card">
                     <div class="card-header text-center">
+                    <a class="btn btn-success float-left" href="api/excel-asistencia" download="downloadFile.xlsx"><i class="fas fa-download"></i></a>
                         <h5 class="card-title">Lista de Asistencia</h5>
                     </div>
                     <div class="card-body bg-light">
